@@ -1,0 +1,42 @@
+body
+{
+	background-color: rgb(141, 131, 102);
+}
+
+.header
+{
+	margin: auto;
+	text-align: center;
+}
+
+.centerbox
+{
+	width: 50%;
+	height: 85%;
+	background-color: rgb(226, 210, 163);
+	margin: auto;
+	padding: 2.5%;
+}
+
+.tool
+{
+	margin: 0px 20% 0px 20%;
+}
+
+.footer
+{
+	height: 5%;
+	width: 55%;
+	background-color: rgb(226, 210, 163);
+	text-align: center;
+	margin: auto;
+}
+
+.charactertool
+{
+	width: 50%;
+	height: 85%;
+	background-color: rgb(183, 171, 132);
+	padding: 2.5%;
+	margin: auto;
+}
