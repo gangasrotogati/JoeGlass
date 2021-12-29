@@ -1,40 +1,95 @@
 <head>
 <link rel="stylesheet" href="mystyle.css">
-<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="namegenerator.js"></script>
+<script src="Lurps.js"></script>
+<script src="LurpsDescriptions.js"></script>
 </head>
 
 <body>
+
 <div class = centerbox>
 
 	<div class = header>
 
 		<h1>LURPS Character Tool</h1>
 
-		<p>
-		Use the forms below to design a character for LURPS. The Character Value tracker will keep track of how many points you spend. Click save and export to create a character sheet.
-		</p>
-
 	</div>
 
 	<div class = charactertool>
-		<form>
-			<label for="name">Name:</label> 		
-			<input type="text" id="name" name="character_name">
+		<p>
+		Use the form below to design a character for LURPS. The Character Value tracker will keep track of how many character points (CP) you spend. Click save and export to create a character sheet.
+		</p>
+		<form id = "characterform" autocomplete="off">
+			<div class = toolsection>
+				<label for="name">Name:</label> 		
+				<input type="text" id="name" onchange = "SetCharacterName()" name="character_name">
+				<select id="race" oninput = "SetCharacterRace(); DisplayTraitDescription();" name="character_race">
+  				<option selected>Human</option>
+  				<option>Rooskald</option>
+  				<option>Erlkin</option>
+  				<option>Dwarf</option>
+  				<option>Orc</option>
+  				<option>Goblin</option>
+  				<option>Satyr</option>
+  				<option>Kobold</option>
+				</select>
 
-			<select id="race" name="character_race">
-  			<option selected>Human</option>
-  			<option>Rooskald</option>
-  			<option>Erlkin</option>
-  			<option>Dwarf</option>
-  			<option>Erlkin</option>
-  			<option>Orc</option>
-  			<option>Goblin</option>
-  			<option>Satyr</option>
-  			<option>Kobold</option>
-			</select>
-			
+				<input type="button" onclick="SetRandomName()" value="random">
+			</div>		
+
+			<div class = toolsection>
+				<p id = "raceDescription" class = "description">Humans are a prolific race which the Gods seemingly have made as a joke. They have invented several competing languages, making communication between themselves impossible outside their own lands. Their bite can cause sepsis, they excrete an explosive gas and they fight each other based on the colour of their hides. In between waging war on each other because they can, they work together furiously to build for themselves, often creating structures that are excessively large. They exist on an unbalanced diet of fats, sugars and substances they know to be toxic to themselves. They lack the dexterity to scratch their own backs and cannot even contort to be able to reach most of it with their tongue. Humans have deep emotional attachments to many ideals such as honour, duty and nobility. These tend to push humans further forward than most races would expect them to, where someone may give up in a hopeless situation a human will blindly continue the path because someone of a higher station ordered it to. Their mass numbers and luck have propelled them to be the dominate race. When the sciences and arts flourished, they simultaneously promoted and suppressed it.</p>
+			</div>
+			<div class = toolsection>
+				<label for="name">Traits:</label> 
+			</div>
+			<div class = toolsection>		
+				<input type="text" id="coreTrait" name="character_coretrait" value = "Press On" disabled>
+				<select id="optionalTrait" oninput = "DisplayTraitDescription();" name="character_optionaltrait">
+					<option>Generalist</option>
+					<option>Specialist</option>
+				</select>
+			</div>	
+			<div class = toolsection>
+			<p id = "traitDescription" class = "description">Attacking does not prevent you from subsequently moving if you had any movement remaining.<br>Pick 1 skill, when making a skill check if you roll 1's you may re - roll them. </p>
+			</div>
+			<div class = toolsection>
+				<label>Stats:</label>
+			</div>
+			<div class = toolsection>
+				<label for="maxHealth">HTP:</label><input class = number type="number" id="maxHealth" value = 10 step = 5 min = 10 max = 200 width = 5px>
+				<label for="maxSpeed">SPE:</label><input class = number type="number" id="maxSpeed" value = 10 step = 5 min = 10 max = 200 width = 5px>
+				<label for="maxMana">MAN:</label><input class = number type="number" id="maxMana" value = 10 step = 5 min = 10 max = 200 width = 5px>
+			</div>
+			<div class = toolsection>
+				<p class = "description"> A single point in a stat raises it by +5. This has no upper limit. Each character starts with 2 ranks in all 3 stats, granting them 10 HTP, MAN and SPE. This does not count against their starting CP amount. </p>
+			</div>
+			<div class = toolsection>
+				<label>Skills:</label>
+			</div>
+			<div class = toolsection>
+				<p class = "description"> Your character cannot have more than 7 ranks in a skill. By default, all characters start off with 0 ranks in all skills, except for Unarmed and one single combat skill, for which they get two free ranks that does not count against their starting CP. All further skills must be purchased with CP, the cost of this is set by your Gamemaster. </p>
+			</div>
+			<div class = toolsection>
+				<label style = "font-style: italic;">Click on a skill to select it.</label>
+			</div>
+			<div class = toolsection id="skillsection">
+			</div>
+			<div class = toolsection>
+				<input type="button" onclick="IncreaseSkill(this)" value="increase skill">
+				<input type="button" onclick="DecreaseSkill(this)" value="decrease skill">
+			</div>
+			<div class = toolsection onchange = "DisplaySkillDescription(this)">
+				<select id="skillset" name = "skillselect">
+				</select>
+			</div
+			<div class = toolsection>
+				<div class = toolsection>
+				<input type="button" onclick="AddSkill()" value="add skill">
+				<input type="button" onclick="RemoveSkill()" value="remove skill">
+				</div>
+				<p id = "skillDescription" class = "description">This skill enables you to create, identify and use potions, poisons, alchemical items and more.Often, having a background in herbalism is useful as well to harvest the plants needed, or mining to dig up useful minerals like cinnabar.Making an item often costs half the store cost.See Crafting with Alchemy, Page 52.</p>
+			</div>
 		</form>
 	</div>
 

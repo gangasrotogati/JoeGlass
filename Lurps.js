@@ -1,3 +1,10 @@
+class Skill {
+	constructor(name, level) {
+		this.Name = name
+		this.Level = level;
+	}
+}
+
 class Character {
 	constructor() {
 		this.name = "unnamed";
@@ -13,10 +20,201 @@ class Character {
 		this.maxMana = 10;
 		this.characterValue = 0;
 		this.description = "";
+
+		this.skillSet.add(new Skill("Unarmed & Grappling", 2));
+		this.race = "Human"
 	}
 }
 
 let character = new Character();
+
+window.onload = function () {
+
+	let skillsSet = new Set();
+	skillsSet.add("Alchemy & Poisons");
+	skillsSet.add("Barter & Appraise");
+	skillsSet.add("Bluff & Fast Talk");
+	skillsSet.add("Climbing & Acrobatics");
+	skillsSet.add("Combat Strategy & Leadership");
+	skillsSet.add("Diplomacy & Persuasion");
+	skillsSet.add("Engineering & Architecture");
+	skillsSet.add("Fantastic Places & Magical Creatures");
+	skillsSet.add("Feat of Strength & Resistance");
+	skillsSet.add("Forgery, Logic & Codes");
+	skillsSet.add("Gather Information & Streetwise");
+	skillsSet.add("History & Geography");
+	skillsSet.add("Identify Spells & Arcane Items");
+	skillsSet.add("Intimidate & Interrogate");
+	skillsSet.add("Medical Application & Physiology");
+	skillsSet.add("Mundane Fauna, Flora & Fungi");
+	skillsSet.add("Performance & Art");
+	skillsSet.add("Pick Locks & Escape Artist");
+	skillsSet.add("Pickpocket, Games & Sleight of Hand");
+	skillsSet.add("Religion & Nobility");
+	skillsSet.add("Riding & Animal Training");
+	skillsSet.add("Sailing & Vehicles");
+	skillsSet.add("Savoir-Faire & Infiltration");
+	skillsSet.add("Searching & Perception");
+	skillsSet.add("Sense Motive & Social Insight");
+	skillsSet.add("Stealth & Disguise");
+	skillsSet.add("Survival & Swim");
+	skillsSet.add("Tinkering & Crafting");
+	skillsSet.add("Traps & Escapology");
+	skillsSet.add("Wits & Dialect");
+	skillsSet.add("Slashing Weapons");
+	skillsSet.add("Crushing Weapons");
+	skillsSet.add("Piercing Weapons");
+	skillsSet.add("Unarmed & Grappling");
+	skillsSet.add("Bows & Crossbows");
+	skillsSet.add("Gunpowder & Grenades");
+	skillsSet.add("Fire & Light");
+	skillsSet.add("Air & Lighting");
+	skillsSet.add("Healing & Abjuration");
+	skillsSet.add("Shadow & Illusion");
+	skillsSet.add("Motion & Levitation");
+	skillsSet.add("Earth & Nature");
+	skillsSet.add("Water & Ice");
+	skillsSet.add("Necromancy & Enchantment");
+	skillsSet.add("Metal & Transmutation");
+	skillsSet.add("Divination & Prediction");
+
+	let text = "";
+	for (const x of skillsSet.values()) {
+		text += "<option>" + x + "</option>";
+	}
+
+	document.getElementById('skillset').innerHTML = text;
+	UpdateSkillsList();
+}
+
+function AddSkill() {
+
+	//check if the skill already exists in the set
+	let skillmatchfound = false;
+	character.skillSet.forEach(function (skill) {
+		let text = skill.Name;
+		if (text.substring(0, 5) == document.getElementById("skillset").value.substring(0, 5)) {
+			skillmatchfound = true;
+		}
+	})
+	//if it doesnt exist then add it to the character skill set 
+	if (skillmatchfound == false) {
+		character.skillSet.add(new Skill(document.getElementById("skillset").value, 1));
+    }
+	UpdateSkillsList();
+}
+
+function AddNewSkill(element, level) {
+
+	//check if the skill already exists in the set
+	let skillmatchfound = false;
+	character.skillSet.forEach(function (skill) {
+		let text = skill.Name;
+		console.log(text);
+		console.log(element.substring(0, 5));
+		if (text.substring(0, 5) == element.substring(0, 5)) {
+			skillmatchfound = true;
+		}
+	})
+	//if it doesnt exist then add it to the character skill set 
+	if (skillmatchfound == false) {
+		character.skillSet.add(new Skill(element.value, level));
+	}
+	UpdateSkillsList();
+}
+
+function IncreaseSkill() {
+	for (let x of document.getElementsByClassName("skilltag")) {
+		if (x.id == "selected") {
+			character.skillSet.forEach(function (skill) {
+				let text = skill.Name;
+				if (text.substring(0, 5) == x.innerHTML.substring(0, 5)) {
+					if (skill.Level < 7) {
+						skill.Level++;
+                    }
+				}
+			})
+		}
+	}
+	UpdateSkillsList();
+}
+
+function DecreaseSkill(element) {
+	for (let x of document.getElementsByClassName("skilltag")) {
+		if (x.id == "selected") {
+			character.skillSet.forEach(function (skill) {
+				let text = skill.Name;
+				if (text.substring(0, 5) == x.innerHTML.substring(0, 5)) {
+					if (skill.Level > 1) {
+						skill.Level--;
+					}
+				}
+			})
+		}
+	}
+	UpdateSkillsList();
+}
+
+function UpdateSkillsList() {
+	//keep the selected skill in memory
+	let selectedText = "";
+	for (let x of document.getElementsByClassName("skilltag")) {
+		if (x.id == "selected") {
+			selectedText = x.innerHTML.substring(0, 5);
+        }
+	}
+	//erase all displayed skills
+	document.getElementById('skillsection').innerHTML = "";
+
+	//sort the skills by level descending
+	const skillsArray = Array.from(character.skillSet)
+	skillsArray.sort((a, b) => {
+		return b.Level - a.Level;
+	});
+	character.skillSet = new Set(skillsArray);
+
+	//redraw the skills
+	for (let x of character.skillSet.values()) {
+		let text = '<p class = "skilltag" id = "unselected" style = "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--bright-gray);" onclick = "SelectSkill(this)">' + x.Name + "\t" + x.Level + "</p>";
+		document.getElementById('skillsection').innerHTML += text;
+	}
+
+	//reselect the selected skill
+	for (let x of document.getElementsByClassName("skilltag")) {
+		if (x.innerHTML.substring(0, 5) == selectedText) {
+			x.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--dark-red);");
+			x.setAttribute("id", "selected");
+		}
+	}
+}
+
+function RemoveSkill() {
+	for (let x of document.getElementsByClassName("skilltag")) {
+		if (x.id == "selected") {
+			character.skillSet.forEach(function (skill) {
+				let text = skill.Name;
+				if (text.substring(0, 5) == x.innerHTML.substring(0, 5)) {
+					character.skillSet.delete(skill)
+                }
+			})
+		}
+	}
+	UpdateSkillsList();
+}
+
+function SelectSkill(skill) {
+	let id = skill.id
+	for (let x of document.getElementsByClassName("skilltag")) {
+		if (x.id == "selected") {
+			x.setAttribute("id", "unselected");
+			x.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--bright-gray);");
+		}
+	}
+	if (id == "unselected") {
+		skill.setAttribute("id", "selected");
+		skill.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--dark-red);");
+	}
+}
 
 function SetRandomName() {
 	character.name = RandomName(character.race);
