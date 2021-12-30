@@ -102,9 +102,23 @@ textarea
 	padding: 5px;
 }
 
+.instruction
+{
+	padding: 5px;
+	font-size: 12px;
+}
+
 #characterform
 {
 	margin: auto;
+}
+
+#featsection
+{
+	background-color: var(--bright-gray);
+	line-height: 0.8;
+	width: 50%;
+	
 }
 
 #skillsection

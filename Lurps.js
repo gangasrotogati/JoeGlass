@@ -11,6 +11,7 @@ class Character {
 		this.race = "Human";
 		this.coreTrait = "";
 		this.optionalTrait = "";
+		this.job = "";
 		this.skillSet = new Set();
 		this.featSet = new Set();
 		this.flawSet = new Set();
@@ -28,8 +29,7 @@ class Character {
 
 let character = new Character();
 
-window.onload = function () {
-
+function GenerateSkillSet() {
 	let skillsSet = new Set();
 	skillsSet.add("Alchemy & Poisons");
 	skillsSet.add("Barter & Appraise");
@@ -87,6 +87,223 @@ window.onload = function () {
 	UpdateSkillsList();
 }
 
+function GenerateFeatSet() {
+	let featsSet = new Set();
+	featsSet.add("Animal Affinity");
+	featsSet.add("Armour Expert");
+	featsSet.add("Arrow Snatch");
+	featsSet.add("Beneath Notice");
+	featsSet.add("Better Staunching");
+	featsSet.add("Blue Blood");
+	featsSet.add("Bowstaff Training");
+	featsSet.add("Brewmaster");
+	featsSet.add("Combat Archery");
+	featsSet.add("Day Magic");
+	featsSet.add("Druidic");
+	featsSet.add("Duellist");
+	featsSet.add("Ensorcell Item");
+	featsSet.add("Fantastic Shot");
+	featsSet.add("Forgettable Face");
+	featsSet.add("Fully Literate");
+	featsSet.add("Healthy");
+	featsSet.add("Horseback Archer");
+	featsSet.add("Improved Charge");
+	featsSet.add("Improved Disarming");
+	featsSet.add("Improved Dual Weapon Fighting");
+	featsSet.add("Inspirational Leader");
+	featsSet.add("Lip Reader");
+	featsSet.add("Magic Fingers");
+	featsSet.add("Mana-Sensitive");
+	featsSet.add("Military Rank");
+	featsSet.add("Mind & Body");
+	featsSet.add("Night Magic");
+	featsSet.add("Piercing Shots");
+	featsSet.add("Pinning Shot");
+	featsSet.add("Plentiful Ammo");
+	featsSet.add("Polearm Master");
+	featsSet.add("Precise Shot");
+	featsSet.add("Prepared");
+	featsSet.add("Press The Attack");
+	featsSet.add("Quick Draw");
+	featsSet.add("Quintessence Magic");
+	featsSet.add("Rage");
+	featsSet.add("Skill Focus");
+	featsSet.add("Skirmisher");
+	featsSet.add("Sorcerous Familiar");
+	featsSet.add("Tough");
+	featsSet.add("Volley Fire");
+	featsSet.add("Warmage");
+	featsSet.add("Weapon Focus (Melee)");
+	featsSet.add("Weapon Focus (Range)");
+	featsSet.add("Wizardly Training");
+	featsSet.add("Forceful Spell");
+	featsSet.add("Penetrating Spell");
+	featsSet.add("Persistent Spell");
+	featsSet.add("Reaching Spell");
+	featsSet.add("Seeking Spell");
+	featsSet.add("Silent Spell");
+
+	let text = "";
+	for (const x of featsSet.values()) {
+		text += "<option>" + x + "</option>";
+	}
+
+	document.getElementById('featset').innerHTML = text;
+}
+
+function GenerateFlawSet() {
+	let flawsSet = new Set();
+	flawsSet.add("Addictions");
+	flawsSet.add("Alchemical Distrust");
+	flawsSet.add("Amnesia");
+	flawsSet.add("Aura of Bad Magic");
+	flawsSet.add("Bad Temper");
+	flawsSet.add("Blabber-Mouth");
+	flawsSet.add("Bloodlust");
+	flawsSet.add("Burn the Witch!");
+	flawsSet.add("Cannot Ride");
+	flawsSet.add("Claustrophobia");
+	flawsSet.add("Clean Freak");
+	flawsSet.add("Code Of Honour");
+	flawsSet.add("Colour Blind");
+	flawsSet.add("Dominant Handed");
+	flawsSet.add("Duty");
+	flawsSet.add("Eldritch Obsessions");
+	flawsSet.add("Ex-Army");
+	flawsSet.add("Fat");
+	flawsSet.add("Finery First");
+	flawsSet.add("Frugal");
+	flawsSet.add("Glutton");
+	flawsSet.add("Grandiose");
+	flawsSet.add("Heritage (Demonic)");
+	flawsSet.add("Heritage (Fey)");
+	flawsSet.add("Heritage (Vampiric)");
+	flawsSet.add("Honest");
+	flawsSet.add("Illiteracy");
+	flawsSet.add("Impatient");
+	flawsSet.add("Mania");
+	flawsSet.add("Miopic");
+	flawsSet.add("Narcissistic");
+	flawsSet.add("Need Source of Element To Cast Spells");
+	flawsSet.add("Nosy");
+	flawsSet.add("Over Spender");
+	flawsSet.add("Paranoia");
+	flawsSet.add("Phobia");
+	flawsSet.add("Pious");
+	flawsSet.add("Possessive");
+	flawsSet.add("Pride");
+	flawsSet.add("Queasy");
+	flawsSet.add("Racist");
+	flawsSet.add("Religious Zealot");
+	flawsSet.add("Reputation");
+	flawsSet.add("Strict Diet");
+	flawsSet.add("Sickly");
+	flawsSet.add("Slow");
+	flawsSet.add("Slow Healer");
+	flawsSet.add("Snobby");
+	flawsSet.add("Social Stigma");
+	flawsSet.add("Ugly");
+	flawsSet.add("Unstable Casting");
+	flawsSet.add("Vertigo");
+
+	let text = "";
+	for (const x of flawsSet.values()) {
+		text += "<option>" + x + "</option>";
+	}
+
+	document.getElementById('flawset').innerHTML = text;
+}
+
+function GenerateJobsSet() {
+	let jobsSet = new Set();
+	jobsSet.add("Advisor");
+	jobsSet.add("Ale-Conner");
+	jobsSet.add("Animal Trainer");
+	jobsSet.add("Apothecary");
+	jobsSet.add("Assassin");
+	jobsSet.add("Barber-Surgeon");
+	jobsSet.add("Bowyer");
+	jobsSet.add("Carpenter");
+	jobsSet.add("Cobbler");
+	jobsSet.add("Demonologist");
+	jobsSet.add("Dyer");
+	jobsSet.add("Engineer");
+	jobsSet.add("Falconer");
+	jobsSet.add("Farrier");
+	jobsSet.add("Fletcher");
+	jobsSet.add("Footman");
+	jobsSet.add("Forester");
+	jobsSet.add("Grave Robber");
+	jobsSet.add("Herald");
+	jobsSet.add("Highway Man");
+	jobsSet.add("Knight");
+	jobsSet.add("Medic");
+	jobsSet.add("Merchant");
+	jobsSet.add("Militia");
+	jobsSet.add("Noble");
+	jobsSet.add("Page");
+	jobsSet.add("Peasant / Serf");
+	jobsSet.add("Priest");
+	jobsSet.add("Reeve");
+	jobsSet.add("Sailor");
+	jobsSet.add("Scribe");
+	jobsSet.add("Soldier");
+	jobsSet.add("Squire");
+	jobsSet.add("Tailor");
+	jobsSet.add("Tinker");
+	jobsSet.add("Witch");
+	jobsSet.add("Executioner");
+	jobsSet.add("Sin Eater");
+	jobsSet.add("Leech Collector");
+
+
+	let text = "";
+	for (const x of jobsSet.values()) {
+		text += "<option>" + x + "</option>";
+	}
+
+	document.getElementById('jobset').innerHTML = text;
+}
+
+window.onload = function () {
+	GenerateSkillSet();
+	GenerateFeatSet();
+	GenerateFlawSet();
+	GenerateJobsSet();
+}
+
+function AddFeat() {
+	//check if the feat already exists in the set
+	let featmatchfound = false;
+	character.featSet.forEach(function (feat) {
+		let text = feat;
+		if (text == document.getElementById("featset").value) {
+			featmatchfound = true;
+		}
+	})
+	//if it doesnt exist then add it to the character feat set 
+	if (featmatchfound == false) {
+		character.featSet.add(document.getElementById("featset").value);
+	}
+	UpdateFeatsList();
+}
+
+function AddFlaw() {
+	//check if the flaw already exists in the set
+	let flawmatchfound = false;
+	character.flawSet.forEach(function (flaw) {
+		let text = flaw;
+		if (text == document.getElementById("flawset").value) {
+			flawmatchfound = true;
+		}
+	})
+	//if it doesnt exist then add it to the character flaw set 
+	if (flawmatchfound == false) {
+		character.flawSet.add(document.getElementById("flawset").value);
+	}
+	UpdateFlawsList();
+}
+
 function AddSkill() {
 
 	//check if the skill already exists in the set
@@ -104,6 +321,12 @@ function AddSkill() {
 	UpdateSkillsList();
 }
 
+function RandomJob() {
+	let rand = Math.floor(Math.random() * 39);
+	document.getElementById("jobset").value = document.getElementById("jobset").options[rand].text;
+}
+
+//This method adds unarmed and grappling on loading the webpage. The other function is hardcoded to reference the skill selector.
 function AddNewSkill(element, level) {
 
 	//check if the skill already exists in the set
@@ -121,6 +344,44 @@ function AddNewSkill(element, level) {
 		character.skillSet.add(new Skill(element.value, level));
 	}
 	UpdateSkillsList();
+}
+
+function AddJob() {
+	character.job = document.getElementById("jobset").value;
+}
+
+function AlterSelectValue(element) {
+	let type = element.type;
+	console.log(element);
+	switch (type) {
+		case "feattag":
+			document.getElementById("featset").value = value;
+			break;
+		case "flawtag":
+			document.getElementById("flawset").value = value;
+			break;
+		case "skilltag":
+			document.getElementById("skillset").value = value;
+			break;
+    }
+}
+
+function AlterFeatSelect(element) {
+	document.getElementById("featset").value = element.innerHTML;
+}
+function AlterFlawSelect(element) {
+	document.getElementById("flawset").value = element.innerHTML;
+}
+function AlterSkillSelect(element) {
+	let text = element.innerHTML
+	selector = document.getElementById("skillset")
+	for (let x of selector.options) {
+		if (x.text.substring(0, 5) == text.substring(0, 5)) {
+			console.log(x);
+			console.log(text.substring(0, 5));
+			document.getElementById("skillset").value = x.text;
+        }
+    }
 }
 
 function IncreaseSkill() {
@@ -155,6 +416,56 @@ function DecreaseSkill(element) {
 	UpdateSkillsList();
 }
 
+function UpdateFeatsList() {
+	//keep the selected feat in memory
+	let selectedText = "";
+	for (let x of document.getElementsByClassName("feattag")) {
+		if (x.id == "selected") {
+			selectedText = x.innerHTML;
+		}
+	}
+	//erase all displayed feats
+	document.getElementById('featsection').innerHTML = "";
+	//redraw the feats
+	for (let x of character.featSet.values()) {
+		let text = '<p class = "feattag" id = "unselected" style = "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--bright-gray);" onclick = "SelectFeat(this); AlterFeatSelect(this); DisplayFeatDescription();">' + x + "</p>";
+		document.getElementById('featsection').innerHTML += text;
+	}
+
+	//reselect the selected feat
+	for (let x of document.getElementsByClassName("feattag")) {
+		if (x.innerHTML == selectedText) {
+			x.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--dark-red);");
+			x.setAttribute("id", "selected");
+		}
+	}
+}
+
+function UpdateFlawsList() {
+	//keep the selected flaw in memory
+	let selectedText = "";
+	for (let x of document.getElementsByClassName("flawtag")) {
+		if (x.id == "selected") {
+			selectedText = x.innerHTML;
+		}
+	}
+	//erase all displayed flaws
+	document.getElementById('flawsection').innerHTML = "";
+	//redraw the flaws
+	for (let x of character.flawSet.values()) {
+		let text = '<p class = "flawtag" id = "unselected" style = "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--bright-gray);" onclick = "SelectFlaw(this); AlterFlawSelect(this); DisplayFlawDescription();">' + x + "</p>";
+		document.getElementById('flawsection').innerHTML += text;
+	}
+
+	//reselect the selected feat
+	for (let x of document.getElementsByClassName("flawtag")) {
+		if (x.innerHTML == selectedText) {
+			x.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--dark-red);");
+			x.setAttribute("id", "selected");
+		}
+	}
+}
+
 function UpdateSkillsList() {
 	//keep the selected skill in memory
 	let selectedText = "";
@@ -175,7 +486,7 @@ function UpdateSkillsList() {
 
 	//redraw the skills
 	for (let x of character.skillSet.values()) {
-		let text = '<p class = "skilltag" id = "unselected" style = "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--bright-gray);" onclick = "SelectSkill(this)">' + x.Name + "\t" + x.Level + "</p>";
+		let text = '<p class = "skilltag" id = "unselected" style = "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--bright-gray);" onclick = "SelectSkill(this); AlterSkillSelect(this); DisplaySkillDescription(this);">' + x.Name + "\t" + x.Level + "</p>";
 		document.getElementById('skillsection').innerHTML += text;
 	}
 
@@ -188,18 +499,88 @@ function UpdateSkillsList() {
 	}
 }
 
+function RemoveFeat() {
+	for (let x of document.getElementsByClassName("feattag")) {
+		if (x.id == "selected") {
+			character.featSet.forEach(function (feat) {
+				let text = feat;
+				if (text == x.innerHTML) {
+					character.featSet.delete(feat);
+				}
+			})
+		}
+	}
+	UpdateFeatsList();
+}
+
+function RemoveFlaw() {
+	for (let x of document.getElementsByClassName("flawtag")) {
+		if (x.id == "selected") {
+			character.flawSet.forEach(function (flaw) {
+				let text = flaw;
+				if (text == x.innerHTML) {
+					character.flawSet.delete(flaw);
+				}
+			})
+		}
+	}
+	UpdateFlawsList();
+}
+
 function RemoveSkill() {
 	for (let x of document.getElementsByClassName("skilltag")) {
 		if (x.id == "selected") {
 			character.skillSet.forEach(function (skill) {
 				let text = skill.Name;
 				if (text.substring(0, 5) == x.innerHTML.substring(0, 5)) {
-					character.skillSet.delete(skill)
+					character.skillSet.delete(skill);
                 }
 			})
 		}
 	}
 	UpdateSkillsList();
+}
+
+function SelectFeat(feat) {
+	let id = feat.id
+	for (let x of document.getElementsByClassName("feattag")) {
+		if (x.id == "selected") {
+			x.setAttribute("id", "unselected");
+			x.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--bright-gray);");
+		}
+	}
+	if (id == "unselected") {
+		feat.setAttribute("id", "selected");
+		feat.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--dark-red);");
+	}
+}
+
+function SelectSkill(skill) {
+	let id = skill.id
+	for (let x of document.getElementsByClassName("skilltag")) {
+		if (x.id == "selected") {
+			x.setAttribute("id", "unselected");
+			x.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--bright-gray);");
+		}
+	}
+	if (id == "unselected") {
+		skill.setAttribute("id", "selected");
+		skill.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--dark-red);");
+	}
+}
+
+function SelectFlaw(flaw) {
+	let id = flaw.id
+	for (let x of document.getElementsByClassName("flawtag")) {
+		if (x.id == "selected") {
+			x.setAttribute("id", "unselected");
+			x.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--bright-gray);");
+		}
+	}
+	if (id == "unselected") {
+		flaw.setAttribute("id", "selected");
+		flaw.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--dark-red);");
+	}
 }
 
 function SelectSkill(skill) {
