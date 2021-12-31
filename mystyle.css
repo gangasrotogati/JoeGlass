@@ -8,7 +8,12 @@
 	    --bright-gray: rgb(175, 170, 159);
 	    --off-white: rgb(220, 214, 201);
         }
-
+@media only screen and (min-width: 768px) {
+	.centerbox {
+		width: 50%;
+	}
+	
+}
 body
 {
 	background-color: var(--primary-color);
@@ -50,7 +55,6 @@ textarea
 
 .centerbox
 {
-	width: 50%;
 	background-color: var(--secondary-color);
 	background-image:url(stone.jpg);
 	padding: 2.5%;
