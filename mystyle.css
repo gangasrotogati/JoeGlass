@@ -8,9 +8,12 @@
 	    --bright-gray: rgb(175, 170, 159);
 	    --off-white: rgb(220, 214, 201);
         }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1200px) {
 	.centerbox {
 		width: 50%;
+	}
+	.footer{
+		width: 55%;
 	}
 	
 }
@@ -23,7 +26,7 @@ body
 	background-attachment: fixed;
   	background-repeat: no-repeat;
   	background-size: cover;
-  	background-position: center center;
+  	background-position: center;
 }
 
 h1 { color: var(--quaternary-color); font-family: 'Helvetica Neue', sans-serif; font-size: 46px; font-weight: 100; line-height: 50px; letter-spacing: 1px; padding: 0 0 40px; border-bottom: double #555; margin: 10px; padding: 10px;}
@@ -82,7 +85,6 @@ textarea
 .footer
 {
 	height: 5%;
-	width: 55%;
 	background-color: var(--secondary-color);
 	background-image:url(stone.jpg);
 	text-align: center;
