@@ -28,10 +28,12 @@ html{
   	background-size: cover;
   	background-position: center;
 	background-size: cover;
+	min-height: 100%;
 }
 
 body
 {
+	min-height: 100%;
 }
 
 h1 { color: var(--quaternary-color); font-family: 'Helvetica Neue', sans-serif; font-size: 46px; font-weight: 100; line-height: 50px; letter-spacing: 1px; padding: 0 0 40px; border-bottom: double #555; margin: 10px; padding: 10px;}
