@@ -1,8 +1,15 @@
 class Skill {
 	constructor(name, level) {
-		this.Name = name
+		this.Name = name;
 		this.Level = level;
 	}
+}
+
+class Item {
+	constructor(name, quantity) {
+		this.Name = name;
+		this.Quantity = quantity;
+    }
 }
 
 class Character {
@@ -12,10 +19,12 @@ class Character {
 		this.coreTrait = "";
 		this.optionalTrait = "";
 		this.job = "";
+		this.belief = "";
 		this.skillSet = new Set();
 		this.featSet = new Set();
 		this.flawSet = new Set();
-		this.itemSet = new Set();
+		this.weaponSet = new Set();
+		this.equipmentSet = new Set();
 		this.maxHealth = 10;
 		this.maxSpeed = 10;
 		this.maxMana = 10;
@@ -28,6 +37,144 @@ class Character {
 }
 
 let character = new Character();
+
+function GenerateBeliefSet() {
+	let beliefSet = new Set();
+	beliefSet.add("The Worshipful Cult of Ironmongers");
+	beliefSet.add("The Ideal of the Self");
+	beliefSet.add("The Church of Circular Reasoning");
+	beliefSet.add("Followers of the Twin Stags");
+	beliefSet.add("Minders of Magic");
+	beliefSet.add("The Circle of Sannairrie");
+	beliefSet.add("Fellsworn");
+	beliefSet.add("Pantheon of Winter");
+	beliefSet.add("Pantheon of Summer");
+
+	let text = "";
+	for (const x of beliefSet.values()) {
+		text += "<option>" + x + "</option>";
+	}
+
+	document.getElementById('beliefset').innerHTML = text;
+}
+
+function GenerateWeaponSet() {
+	let itemSet = new Set();
+	itemSet.add("Axe Pistol");
+	itemSet.add("Basket hilt Sword");
+	itemSet.add("Bastard Sword");
+	itemSet.add("Baton / Sceptre");
+	itemSet.add("Blunderbuss");
+	itemSet.add("Caestus");
+	itemSet.add("Cavalry Carbine");
+	itemSet.add("Claws");
+	itemSet.add("Crossbow");
+	itemSet.add("Dagger");
+	itemSet.add("Estoc");
+	itemSet.add("Flail");
+	itemSet.add("Flamberge / Zweihänder");
+	itemSet.add("Glaive");
+	itemSet.add("Greataxe");
+	itemSet.add("Halberd");
+	itemSet.add("Hand Axe");
+	itemSet.add("Heater Shield");
+	itemSet.add("Katana");
+	itemSet.add("Light Mace");
+	itemSet.add("Longbow");
+	itemSet.add("Longsword");
+	itemSet.add("Lucerne Hammer");
+	itemSet.add("Morningstar");
+	itemSet.add("Musket");
+	itemSet.add("Pike");
+	itemSet.add("Pistol");
+	itemSet.add("Quarterstaff");
+	itemSet.add("Rapier");
+	itemSet.add("Repeating Crossbow");
+	itemSet.add("Rifle");
+	itemSet.add("Sabre");
+	itemSet.add("Shortbow");
+	itemSet.add("Shortsword");
+	itemSet.add("Sickle");
+	itemSet.add("Sling");
+	itemSet.add("Spear");
+	itemSet.add("Warhammer");
+	itemSet.add("Warpick");
+	itemSet.add("Wrist Crossbow");
+
+	let text = "";
+	for (const x of itemSet.values()) {
+		text += "<option>" + x + "</option>";
+	}
+
+	document.getElementById('weaponset').innerHTML = text;
+}
+
+function GenerateEquipmentSet() {
+	let itemSet = new Set();
+	itemSet.add("Alchemy Set");
+	itemSet.add("Medical Kit");
+	itemSet.add("Repair Kit");
+	itemSet.add("Lockpick Kit");
+	itemSet.add("Hunters Kit");
+	itemSet.add("Gamblers Kit");
+	itemSet.add("Ball of High Quality String");
+	itemSet.add("Bear Trap");
+	itemSet.add("Bells on string");
+	itemSet.add("Book");
+	itemSet.add("Diary");
+	itemSet.add("Spellbook");
+	itemSet.add("Prayerbook");
+	itemSet.add("Boot Polish");
+	itemSet.add("Box of Water Proof Matches (x20)");
+	itemSet.add("Bullseye Lantern (1 hour per dose of oil)");
+	itemSet.add("Caltrops");
+	itemSet.add("Candle (30 minutes)");
+	itemSet.add("Chalk");
+	itemSet.add("Charcoal");
+	itemSet.add("Chisel");
+	itemSet.add("Cloak, Hooded");
+	itemSet.add("Clothing");
+	itemSet.add("Compass");
+	itemSet.add("Desert Clothes");
+	itemSet.add("Dye / Ink (coloured)");
+	itemSet.add("Exceptionally Fancy Hat");
+	itemSet.add("Extendable Pole (10 foot)");
+	itemSet.add("Flint & Steel");
+	itemSet.add("Hammer");
+	itemSet.add("Handcuffs + Shackles");
+	itemSet.add("Holy Water");
+	itemSet.add("Lamp Oil (10 doses)");
+	itemSet.add("Lantern (2 hours per dose of oil)");
+	itemSet.add("Leg Quiver (holds extra ammunition)");
+	itemSet.add("Marbles");
+	itemSet.add("Needle & Thread");
+	itemSet.add("Net (10x10 foot)");
+	itemSet.add("Noble Clothing");
+	itemSet.add("Padlock and Key");
+	itemSet.add("Paper / Parchment");
+	itemSet.add("Piton (reduces difficulty of climbing by DC-2)");
+	itemSet.add("Pocket watch");
+	itemSet.add("Rabbit Snare");
+	itemSet.add("Ration (3 meals for 1 day of food)");
+	itemSet.add("Razor Wire");
+	itemSet.add("Rope, 50 feet");
+	itemSet.add("Sack");
+	itemSet.add("Signet Ring");
+	itemSet.add("Slow Match (x20)");
+	itemSet.add("Soap (extra slippery)");
+	itemSet.add("Telescope ");
+	itemSet.add("Trap Components");
+	itemSet.add("Waterskin");
+	itemSet.add("Winter Clothes");
+	itemSet.add("Wizardy-Looking Robes and Hat");
+
+	let text = "";
+	for (const x of itemSet.values()) {
+		text += "<option>" + x + "</option>";
+	}
+
+	document.getElementById('equipmentset').innerHTML = text;
+}
 
 function GenerateSkillSet() {
 	let skillsSet = new Set();
@@ -270,6 +417,9 @@ window.onload = function () {
 	GenerateFeatSet();
 	GenerateFlawSet();
 	GenerateJobsSet();
+	GenerateBeliefSet();
+	GenerateWeaponSet();
+	GenerateEquipmentSet();
 }
 
 function AddFeat() {
@@ -321,6 +471,80 @@ function AddSkill() {
 	UpdateSkillsList();
 }
 
+function AddWeapon() {
+
+	//check if the weapon already exists in the set
+	let weaponmatchfound = false;
+	let matchname = "";
+	let matchquantity = 0;
+	character.weaponSet.forEach(function (item) {
+		let text = item.Name;
+		if (text.substring(0, 5) == document.getElementById("weaponset").value.substring(0, 5)) {
+			weaponmatchfound = true;
+			matchname = item.Name;
+			matchquantity = item.Quantity;
+		}
+	})
+	//if it doesnt exist then add it to the character skill set 
+	if (weaponmatchfound == false) {
+		if (WeaponsCounter() < 2) {
+			character.weaponSet.add(new Item(document.getElementById("weaponset").value, 1));
+        }
+	}
+	else {
+		if (matchquantity != 2) {
+			character.weaponSet = new Set();
+			character.weaponSet.add(new Item(matchname, 2))
+		}
+    }
+	UpdateWeaponsList();
+}
+
+function AddEquipment() {
+	//check if the equipment already exists in the set
+	let equipmentmatchfound = false;
+	let matchname = "";
+	let matchquantity = 0;
+	character.equipmentSet.forEach(function (item) {
+		let text = item.Name;
+		if (text.substring(0, 5) == document.getElementById("equipmentset").value.substring(0, 5)) {
+			equipmentmatchfound = true;
+			matchname = item.Name;
+			matchquantity = item.Quantity;
+			if (document.getElementById("equipmentset").value == "Alchemy Set" || document.getElementById("equipmentset").value == "Medical Kit" || document.getElementById("equipmentset").value == "Repair Kit" || document.getElementById("equipmentset").value == "Lockpick Set" || document.getElementById("equipmentset").value == "Hunters Kit" || document.getElementById("equipmentset").value == "Gamblers Kit") {
+				if (EquipmentCounter() < 1) {
+					character.equipmentSet.delete(item);
+				}
+			}
+			else if (EquipmentCounter() < 3) {
+				character.equipmentSet.delete(item);
+			}
+		}
+	})
+	//if it doesnt exist then add it to the character skill set 
+	if (equipmentmatchfound == false) {
+		if (document.getElementById("equipmentset").value == "Alchemy Set" || document.getElementById("equipmentset").value == "Medical Kit" || document.getElementById("equipmentset").value == "Repair Kit" || document.getElementById("equipmentset").value == "Lockpick Set" || document.getElementById("equipmentset").value == "Hunters Kit" || document.getElementById("equipmentset").value == "Gamblers Kit") {
+			if (EquipmentCounter() < 1) {
+				character.equipmentSet.add(new Item(document.getElementById("equipmentset").value, 1));
+			}
+		}
+		else if (EquipmentCounter() < 3) {
+			character.equipmentSet.add(new Item(document.getElementById("equipmentset").value, 1));
+		}
+	}
+	else {
+		if (document.getElementById("equipmentset").value == "Alchemy Set" || document.getElementById("equipmentset").value == "Medical Kit" || document.getElementById("equipmentset").value == "Repair Kit" || document.getElementById("equipmentset").value == "Lockpick Set" || document.getElementById("equipmentset").value == "Hunters Kit" || document.getElementById("equipmentset").value == "Gamblers Kit") {
+			if (EquipmentCounter() < 1) {
+				character.equipmentSet.add(new Item(matchname, matchquantity + 1));
+			}
+		}
+		else if (EquipmentCounter() < 3) {
+			character.equipmentSet.add(new Item(matchname, matchquantity + 1));
+		}
+	}
+	UpdateEquipmentList();
+}
+
 function RandomJob() {
 	let rand = Math.floor(Math.random() * 39);
 	document.getElementById("jobset").value = document.getElementById("jobset").options[rand].text;
@@ -344,6 +568,10 @@ function AddNewSkill(element, level) {
 		character.skillSet.add(new Skill(element.value, level));
 	}
 	UpdateSkillsList();
+}
+
+function AddBelief() {
+	character.belief = document.getElementById("beliefset").value;
 }
 
 function AddJob() {
@@ -457,7 +685,7 @@ function UpdateFlawsList() {
 		document.getElementById('flawsection').innerHTML += text;
 	}
 
-	//reselect the selected feat
+	//reselect the selected flaw
 	for (let x of document.getElementsByClassName("flawtag")) {
 		if (x.innerHTML == selectedText) {
 			x.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--dark-red);");
@@ -493,6 +721,56 @@ function UpdateSkillsList() {
 	//reselect the selected skill
 	for (let x of document.getElementsByClassName("skilltag")) {
 		if (x.innerHTML.substring(0, 5) == selectedText) {
+			x.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--dark-red);");
+			x.setAttribute("id", "selected");
+		}
+	}
+}
+
+function UpdateWeaponsList() {
+	//keep the selected weapon in memory
+	let selectedText = "";
+	for (let x of document.getElementsByClassName("weapontag")) {
+		if (x.id == "selected") {
+			selectedText = x.innerHTML;
+		}
+	}
+	//erase all displayed weapon
+	document.getElementById('weaponsection').innerHTML = "";
+	//redraw the weapons
+	for (let x of character.weaponSet.values()) {
+		let text = '<p class = "weapontag" id = "unselected" style = "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--bright-gray);" onclick = "SelectWeapon(this);">' + x.Name + "\t x" + x.Quantity + "</p>";
+		document.getElementById('weaponsection').innerHTML += text;
+	}
+
+	//reselect the selected weapon
+	for (let x of document.getElementsByClassName("weapontag")) {
+		if (x.innerHTML == selectedText) {
+			x.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--dark-red);");
+			x.setAttribute("id", "selected");
+		}
+	}
+}
+
+function UpdateEquipmentList() {
+	//keep the selected equipment in memory
+	let selectedText = "";
+	for (let x of document.getElementsByClassName("equipmenttag")) {
+		if (x.id == "selected") {
+			selectedText = x.innerHTML;
+		}
+	}
+	//erase all displayed equipment
+	document.getElementById('equipmentsection').innerHTML = "";
+	//redraw the equipment
+	for (let x of character.equipmentSet.values()) {
+		let text = '<p class = "equipmenttag" id = "unselected" style = "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--bright-gray);" onclick = "SelectEquipment(this);">' + x.Name + "\t x" + x.Quantity + "</p>";
+		document.getElementById('equipmentsection').innerHTML += text;
+	}
+
+	//reselect the selected equipment
+	for (let x of document.getElementsByClassName("equipmenttag")) {
+		if (x.innerHTML == selectedText) {
 			x.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--dark-red);");
 			x.setAttribute("id", "selected");
 		}
@@ -541,6 +819,34 @@ function RemoveSkill() {
 	UpdateSkillsList();
 }
 
+function RemoveWeapon() {
+	for (let x of document.getElementsByClassName("weapontag")) {
+		if (x.id == "selected") {
+			character.weaponSet.forEach(function (weapon) {
+				let text = weapon.Name;
+				if (text.substring(0, 5) == x.innerHTML.substring(0, 5)) {
+					character.weaponSet.delete(weapon);
+				}
+			})
+		}
+	}
+	UpdateWeaponsList();
+}
+
+function RemoveEquipment() {
+	for (let x of document.getElementsByClassName("equipmenttag")) {
+		if (x.id == "selected") {
+			character.equipmentSet.forEach(function (equipment) {
+				let text = equipment.Name;
+				if (text.substring(0, 5) == x.innerHTML.substring(0, 5)) {
+					character.equipmentSet.delete(equipment);
+				}
+			})
+		}
+	}
+	UpdateEquipmentList();
+}
+
 function SelectFeat(feat) {
 	let id = feat.id
 	for (let x of document.getElementsByClassName("feattag")) {
@@ -583,17 +889,31 @@ function SelectFlaw(flaw) {
 	}
 }
 
-function SelectSkill(skill) {
-	let id = skill.id
-	for (let x of document.getElementsByClassName("skilltag")) {
+function SelectWeapon(weapon) {
+	let id = weapon.id;
+	for (let x of document.getElementsByClassName("weapontag")) {
 		if (x.id == "selected") {
 			x.setAttribute("id", "unselected");
 			x.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--bright-gray);");
 		}
 	}
 	if (id == "unselected") {
-		skill.setAttribute("id", "selected");
-		skill.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--dark-red);");
+		weapon.setAttribute("id", "selected");
+		weapon.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--dark-red);");
+	}
+}
+
+function SelectEquipment(equipment) {
+	let id = equipment.id;
+	for (let x of document.getElementsByClassName("equipmenttag")) {
+		if (x.id == "selected") {
+			x.setAttribute("id", "unselected");
+			x.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--bright-gray);");
+		}
+	}
+	if (id == "unselected") {
+		equipment.setAttribute("id", "selected");
+		equipment.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--dark-red);");
 	}
 }
 
@@ -704,6 +1024,25 @@ function SetTraitOptions() {
 			document.getElementById('optionalTrait').innerHTML = "<option>Alert</option><option>Colored Scales (Fire)</option><option>Colored Scales (Ice)</option><option>Colored Scales (Lightning)</option><option>Colored Scales (Poison & Venom)</option>";
 			break;
 	}
+}
+
+function WeaponsCounter() {
+	let totalQuantity = 0;
+	character.weaponSet.forEach(function (weapon) {
+		totalQuantity += weapon.Quantity;
+	})
+	return totalQuantity;
+}
+
+function EquipmentCounter() {
+	let totalQuantity = 0;
+	character.equipmentSet.forEach(function (equipment) {
+		totalQuantity += equipment.Quantity;
+		if (equipment.Name == "Alchemy Set" || equipment.Name == "Medical Kit" || equipment.Name == "Repair Kit" || equipment.Name == "Lockpick Set" || equipment.Name == "Hunters Kit" || equipment.Name == "Gamblers Kit") {
+			totalQuantity += 2;
+        }
+	})
+	return totalQuantity;
 }
 
 document.addEventListener('keypress', function (e) {

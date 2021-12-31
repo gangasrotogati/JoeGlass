@@ -653,7 +653,7 @@ function DisplayJobDescription() {
             description = "Life as a soldier is brutal and dirty. If you aren't a soldier, it is even rougher than you can probably imagine. Soldiers face the prospect of being struck down by many crude weapons. If you don't perish immediately, you risk being carried off as a prisoner of war. If someone doesn't ransom you, you are as good as gone. ";
             break;
         case "Squire":
-            description = "By the current period, squires have evolved over the course of history to be ranked next to nobles in importance. A squire is a man of high standing, who lives on an estate in a rural area. Her is an important link between the noble class and the peasants who farm his land.";
+            description = "By the current period, squires have evolved over the course of history to be ranked next to nobles in importance. A squire is a man of high standing, who lives on an estate in a rural area. He is an important link between the noble class and the peasants who farm his land.";
             break;
         case "Tailor":
             description = "The duty of tailors is to construct clothes for a small segment of the population. Their work is heavily bound by tradition and limited resources.";
@@ -674,4 +674,38 @@ function DisplayJobDescription() {
             description = "Involved someone walking into a body of water with no leg protection. A seasonal and underpaid post.";
     }
     document.getElementById("jobDescription").innerHTML = description;
+}
+
+function DisplayBeliefDescription() {
+    let text = document.getElementById("beliefset").value
+    let description = "";
+    switch (text) {
+        case "The Worshipful Cult of Ironmongers":
+            description = "To smith metal is purity of the soul, taking earth, air, water and fire to create a solid item is greatness. Largely unchanging, respect goes to the eldest or most law abiding. Their temples are frequently filled with artwork made of metals. To shape the toughest metals is the best of these, and tiny trinkets of hard metals are worn around the necks as proof of their devotion.";
+            break;
+        case "The Ideal of the Self":
+            description = "It is said that the Gods made man in his own image, and as such, the religion focuses on the self. To be stronger, smarter, more powerful and dominant. To let this gift go to waste is foolish. Cults form around strong leaders, who work together to make one of themselves greater and thus, more holy. Their order is one of strict hierarchy, the first is to be obeyed without question, the second is to be obeyed after him. Even so, the thousandth member has authority over the thousand and first.";
+            break;
+        case "The Church of Circular Reasoning":
+            description = "The holy order of the truth of circular reasoning believe in many orders of deities that have various levels of power and there is no agreement within the religion on which God is superior. Typically a patriarchy, as their main service is akin to a maths lecture and they believe males teach better.They find that the best way to understand the Gods is to observe patterns, sequences and how maths interacts with the world.The arrangement of petals on a flower, the way the tides can be measured.The first believer was a man called Haynes Mahname, who received the holy scriptures from himself in the future.To them, all things end as they started, everything is in some way circular.";
+            break;
+        case "Followers of the Twin Stags":
+            description = "All life begins at the black stag, who is fatherly, old and silent. Life will eventually end when the last bit of the black stag's youth is gone. All life ends at the white stag, who is brotherly, young and cunning. Each death comes to him in the end - where his youth and guile protects each soul to the afterlife. All followers await the day the two stags switch places, and begin the next era - though prophecies are vague and conflicting as to what the events are when this happens, for good or for bad.";
+            break;
+        case "Minders of Magic":
+            description = "The idea that all magic is alive, each spell a part of a mind or entity which magic is the body, blood, soul and especially the mind of. Deeply into the study of magic and the seemingly pulsating nature of leylines, magical winds and likewise natural magical phenomenons. They await the day that contact can be made with the great and seemingly cosmic sized force that is magic itself.";
+            break;
+        case "The Circle of Sannairrie":
+            description = "Largely a state of mind, rather than a deity worship. It teaches about various local powers and spirits (sometimes demigods of note) which are about the local region. Its members speak to nature and its creatures, to best work out harmony with civilisations. Typically, a small shrine is erected in town centres, or the closest point, as respect for nature and its welcome into a city. Named after Sannairrie, who was a legendary figure who was a greedy merchant whom followed a path of self-discovery and became a prominent prophet for nature spirits. Often provides guides for the local woods, they sometimes send representatives to tend to farms in dry seasons. What is important to note is that druids are not peaceful and pacifistic. Some members are barbaric shamans, living in the woods and putting down packs of wolves, herds of deer and stray dragons to keep nature in balance.";
+            break;
+        case "Fellsworn":
+            description = 'A cult that follows the most recent "chosen" warlock, or necromancer. Each one convinced that this time, this evildoer is the one to serve, or else. A hard cult to destroy, as it always rises again whenever there is someone willing to use dark magic for evil, and one willing to follow... It is believed that these teachings are given out by demons and evil spirits, who give power in exchange for worship. Demons gravitate to people who use magic for evil and profane it with dark acts and so many of these cults schism to include a primary element, often darkness, fire, ice, death or whatever magic or act was used to conjure the demon.';
+            break;
+        case "Pantheon of Winter":
+            description = "By worshipping the High Sidhe of the Winter Courts, mortals seek to weather harsh winters and curry favour with Queen Mab, Lady Winter and The Heir of Frost. This religion is much like the real courts, in that they are in deep competition and loathing of their counterpart, the Summer Court.";
+            break;
+        case "Pantheon of Summer":
+            description = "By worshipping the High Sidhe of the Summer Courts, mortals who wish for happiness and health, and to curry favour with Queen Titania, Lady Summer and The Heir of Sun. This religion is much like the real courts, in that they are in deep competition and loathing of their counterpart, the Winter Court.";
+    }
+    document.getElementById("beliefDescription").innerHTML = description;
 }

@@ -9,13 +9,14 @@
 
 <div class = centerbox>
 
-	<div class = header>
-
-		<h1>LURPS Character Tool</h1>
-
-	</div>
-
 	<div class = charactertool>
+
+		<div class = header>
+
+			<h1>LURPS Character Tool</h1>
+
+		</div>
+
 		<p>
 		Use the form below to design a character for LURPS. The Character Value tracker will keep track of how many character points (CP) you spend. Click save and export to create a character sheet.
 		</p>
@@ -51,7 +52,7 @@
 				</select>
 			</div>	
 			<div class = toolsection>
-			<p id = "traitDescription" class = "description">Attacking does not prevent you from subsequently moving if you had any movement remaining.<br>Pick 1 skill, when making a skill check if you roll 1's you may re - roll them. </p>
+			<p id = "traitDescription" class = "description">Attacking does not prevent you from subsequently moving if you had any movement remaining.<br>All your skill rolls do not lock out 1's for the purpose of re - rolling failed dice.</p>
 			</div>
 			<div class = toolsection>
 				<label>Stats:</label>
@@ -109,6 +110,19 @@
 				<p id = "flawDescription" class = "description">You are addicted to a substance like drinking or smoking. Or an act, like dancing or gambling. You must resist or feed your addiction if the opportunity presents itself.</p>
 			</div>
 			<div class = toolsection>
+				<label>Religion / Beliefs:</label>
+			</div>
+			<div class = toolsection>
+				<p class = "instruction"> Most if not all civilized places have methods of belief and religions. Players should pick a religion as part of character creation to help round them off. With all the mystical and unexplained things that happen, atheism is rarer than chicken teeth.</p>
+			</div>
+			<div class = toolsection>
+				<select id="beliefset" name = "beliefselect" onchange = "AddBelief(); DisplayBeliefDescription();">
+				</select>
+			</div>
+			<div class = toolsection>
+				<p id="beliefDescription" class = "description">To smith metal is purity of the soul, taking earth, air, water and fire to create a solid item is greatness. Largely unchanging, respect goes to the eldest or most law abiding. Their temples are frequently filled with artwork made of metals. To shape the toughest metals is the best of these, and tiny trinkets of hard metals are worn around the necks as proof of their devotion.</p>
+			</div>
+			<div class = toolsection>
 				<label>Jobs & Careers:</label>
 			</div>
 			<div class = toolsection>
@@ -147,6 +161,50 @@
 				<input type="button" onclick="RemoveSkill()" value="remove skill">
 				</div>
 				<p id = "skillDescription" class = "description">This skill enables you to create, identify and use potions, poisons, alchemical items and more.Often, having a background in herbalism is useful as well to harvest the plants needed, or mining to dig up useful minerals like cinnabar.Making an item often costs half the store cost.See Crafting with Alchemy, Page 52.</p>
+			</div>
+			<div class = toolsection>
+				<label>Starting Weapons:</label>
+			</div>
+			<div class = toolsection>
+			<p class = "instruction"> An adventurer starts out with either two weapons of their choice, or a weapon and a heater shield (standard quality made of wood/steel).
+			</p>
+			</div>
+			<div class = toolsection>
+				<label style = "font-style: italic;">Click on an item to select it.</label>
+			</div>
+			<div class = toolsection id="weaponsection">
+			</div>
+			<div class = toolsection onchange = "">
+				<select id="weaponset" name = "weaponselect">
+				</select>
+			</div>
+			<div class = toolsection>
+				<div class = toolsection>
+				<input type="button" onclick="AddWeapon()" value="add item">
+				<input type="button" onclick="RemoveWeapon()" value="remove item">
+				</div>
+			</div>
+			<div class = toolsection>
+				<label>Starting Equipment:</label>
+			</div>
+			<div class = toolsection>
+			<p class = "instruction"> They also start with around 3 items or 1 kit (which contains 2 uses) from the list on this page and 5d6 silver pieces. For every character point beyond 20, roll an addition 1d6 silver.
+			</p>
+			</div>
+			<div class = toolsection>
+				<label style = "font-style: italic;">Click on an item to select it.</label>
+			</div>
+			<div class = toolsection id="equipmentsection">
+			</div>
+			<div class = toolsection onchange = "">
+				<select id="equipmentset" name = "equipmentselect">
+				</select>
+			</div>
+			<div class = toolsection>
+				<div class = toolsection>
+				<input type="button" onclick="AddEquipment()" value="add item">
+				<input type="button" onclick="RemoveEquipment()" value="remove item">
+				</div>
 			</div>
 		</form>
 	</div>
