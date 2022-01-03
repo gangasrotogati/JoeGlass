@@ -16,10 +16,10 @@ class Character {
 	constructor() {
 		this.name = "unnamed";
 		this.race = "Human";
-		this.coreTrait = "";
-		this.optionalTrait = "";
-		this.job = "";
-		this.belief = "";
+		this.coreTrait = "Press On";
+		this.optionalTrait = "Generalist";
+		this.job = "Advisor";
+		this.belief = "The Worshipful Cult of Ironmongers";
 		this.skillSet = new Set();
 		this.featSet = new Set();
 		this.flawSet = new Set();
@@ -30,6 +30,7 @@ class Character {
 		this.maxMana = 10;
 		this.characterValue = 0;
 		this.description = "";
+		this.silver = 0;
 
 		this.skillSet.add(new Skill("Unarmed & Grappling", 2));
 		this.race = "Human"
@@ -262,7 +263,7 @@ function GenerateFeatSet() {
 	featsSet.add("Magic Fingers");
 	featsSet.add("Mana-Sensitive");
 	featsSet.add("Military Rank");
-	featsSet.add("Mind & Body");
+	featsSet.add("Mind and Body");
 	featsSet.add("Night Magic");
 	featsSet.add("Piercing Shots");
 	featsSet.add("Pinning Shot");
@@ -511,7 +512,7 @@ function AddEquipment() {
 			equipmentmatchfound = true;
 			matchname = item.Name;
 			matchquantity = item.Quantity;
-			if (document.getElementById("equipmentset").value == "Alchemy Set" || document.getElementById("equipmentset").value == "Medical Kit" || document.getElementById("equipmentset").value == "Repair Kit" || document.getElementById("equipmentset").value == "Lockpick Set" || document.getElementById("equipmentset").value == "Hunters Kit" || document.getElementById("equipmentset").value == "Gamblers Kit") {
+			if (document.getElementById("equipmentset").value == "Alchemy Set" || document.getElementById("equipmentset").value == "Medical Kit" || document.getElementById("equipmentset").value == "Repair Kit" || document.getElementById("equipmentset").value == "Lockpick Kit" || document.getElementById("equipmentset").value == "Hunters Kit" || document.getElementById("equipmentset").value == "Gamblers Kit") {
 				if (EquipmentCounter() < 1) {
 					character.equipmentSet.delete(item);
 				}
@@ -557,8 +558,6 @@ function AddNewSkill(element, level) {
 	let skillmatchfound = false;
 	character.skillSet.forEach(function (skill) {
 		let text = skill.Name;
-		console.log(text);
-		console.log(element.substring(0, 5));
 		if (text.substring(0, 5) == element.substring(0, 5)) {
 			skillmatchfound = true;
 		}
@@ -580,7 +579,6 @@ function AddJob() {
 
 function AlterSelectValue(element) {
 	let type = element.type;
-	console.log(element);
 	switch (type) {
 		case "feattag":
 			document.getElementById("featset").value = value;
@@ -605,8 +603,6 @@ function AlterSkillSelect(element) {
 	selector = document.getElementById("skillset")
 	for (let x of selector.options) {
 		if (x.text.substring(0, 5) == text.substring(0, 5)) {
-			console.log(x);
-			console.log(text.substring(0, 5));
 			document.getElementById("skillset").value = x.text;
         }
     }
@@ -642,6 +638,64 @@ function DecreaseSkill(element) {
 		}
 	}
 	UpdateSkillsList();
+}
+
+function IncreaseStat() {
+	for (let x of document.getElementsByClassName("stat")) {
+		if (x.id == "selected") {
+			switch (x.innerHTML.substring(0, 3)) {
+				case "HTP": {
+					if (character.maxHealth < 95) {
+						character.maxHealth += 5;
+						x.innerHTML = "HTP: " + character.maxHealth;
+					}
+					break;
+				}
+				case "MAN": {
+					if (character.maxMana < 95) {
+						character.maxMana += 5;
+						x.innerHTML = "MAN: " + character.maxMana;
+					}
+					break;
+				}
+				case "SPE": {
+					if (character.maxSpeed < 95) {
+						character.maxSpeed += 5;
+						x.innerHTML = "SPE: " + character.maxSpeed;
+					}
+				}
+            }
+        }
+    }
+}
+
+function DecreaseStat() {
+	for (let x of document.getElementsByClassName("stat")) {
+		if (x.id == "selected") {
+			switch (x.innerHTML.substring(0, 3)) {
+				case "HTP": {
+					if (character.maxHealth > 10) {
+						character.maxHealth -= 5;
+						x.innerHTML = "HTP: " + character.maxHealth;
+					}
+					break;
+				}
+				case "MAN": {
+					if (character.maxMana > 10) {
+						character.maxMana -= 5;
+						x.innerHTML = "MAN: " + character.maxMana;
+					}
+					break;
+				}
+				case "SPE": {
+					if (character.maxSpeed > 10) {
+						character.maxSpeed -= 5;
+						x.innerHTML = "SPE: " + character.maxSpeed;
+					}
+				}
+			}
+		}
+	}
 }
 
 function UpdateFeatsList() {
@@ -917,6 +971,21 @@ function SelectEquipment(equipment) {
 	}
 }
 
+function SelectStat(stat) {
+	let id = stat.id;
+
+	for (let x of document.getElementsByClassName("stat")) {
+		if (x.id == "selected") {
+			x.setAttribute("id", "unselected");
+			x.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--bright-gray);");
+		}
+	}
+	if (id == "unselected") {
+		stat.setAttribute("id", "selected");
+		stat.setAttribute("style", "margin: auto; padding: 5px; background-color: var(--off-white); border-style: solid; border-color: var(--dark-red);");
+	}
+}
+
 function SetRandomName() {
 	character.name = RandomName(character.race);
 	document.getElementById('name').value = character.name;
@@ -930,7 +999,12 @@ function SetCharacterRace() {
 	character.race = document.getElementById('race').value;
 	SetRaceDescription(character.race);
 	SetCoreTrait();
-	SetTraitOptions()
+	SetTraitOptions();
+	SetOptionalTrait();
+}
+
+function SetOptionalTrait() {
+	character.optionalTrait = document.getElementById("optionalTrait").value;
 }
 
 function SetRaceDescription(race) {
@@ -1043,6 +1117,154 @@ function EquipmentCounter() {
         }
 	})
 	return totalQuantity;
+}
+
+function CalculateCharacterValue() {
+	let characterValue = 0;
+	let bIsTrainedInCombat = false;
+	const CombatSkills = [ "Slashing Weapons", "Crushing Weapons", "Piercing Weapons", "Bows & Crossbows", "Gunpowder & Grenades"];
+
+	character.skillSet.forEach(function (skill) {
+		//Check each skill to see if it is a combat skill, if so, reduce the cost by one or two and declare the character trained in a combat skill
+		for (let i = 0; i < CombatSkills.length; i++) {
+			if (skill.Name == CombatSkills[i]) {
+				if (bIsTrainedInCombat == false) {
+					characterValue -= 1;
+				}
+				if (bIsTrainedInCombat == false && skill.Level > 1) {
+					characterValue -= 1;
+				}
+				bIsTrainedInCombat = true;
+			}
+		}
+	})
+	character.skillSet.forEach(function (skill) {
+		if (skill.Name == "Unarmed & Grappling") {
+			characterValue -= 1;
+		}
+		if (skill.Name == "Unarmed & Grappling" && skill.Level > 1) {
+			characterValue -= 1;
+		}
+		if (skill.Name == "Unarmed & Grappling" && skill.Level > 2 && bIsTrainedInCombat == false) {
+			characterValue -= 1;
+		}
+		if (skill.Name == "Unarmed & Grappling" && skill.Level > 3 && bIsTrainedInCombat == false) {
+			characterValue -= 1;
+		}
+		characterValue += skill.Level;
+	})
+
+	characterValue += character.featSet.size * 2;
+
+	if (character.featSet.size > 0) {
+		if (character.flawSet.size > 1) {
+			characterValue -= 2;
+        }
+	}
+
+	if (character.featSet.size > 1) {
+		if (character.flawSet.size > 3) {
+			characterValue -= 2;
+		}
+	}
+
+	characterValue += (character.maxHealth - 10) / 5;
+	characterValue += (character.maxMana - 10) / 5;
+	characterValue += (character.maxSpeed - 10) / 5;
+
+	character.characterValue = characterValue;
+	document.getElementById("charactervalue").innerHTML = characterValue;
+}
+
+function SetDescription() {
+	console.log(document.getElementById("description").value);
+	character.description = document.getElementById("description").value;
+}
+
+function PrintCharacter() {
+	let text = "<div id='printhere' class = toolsection>";
+
+	text += "<h2>" + character.name + "</h2>";
+	text += "<ul>";
+	text += "<li>" + character.race + "</li>";
+	text += "<li>" + character.coreTrait + "</li>";
+	text += "<li>" + character.optionalTrait + "</li>";
+	text += "</ul >";
+	text += "<ul>";
+	text += "<li> HTP:" + character.maxHealth + "</li>";
+	text += "<li> MAN:" + character.maxMana + "</li>";
+	text += "<li> SPE:" + character.maxSpeed + "</li>";
+	text += "</ul><ul>"
+	text += "<li>" + character.job + "</li>";
+	text += "<li>" + character.belief + "</li>";
+	text += "</ul>";
+
+
+	text += "<ul>"
+	character.featSet.forEach(function (feat) {
+		text += "<li>" + feat + "</li>"
+	})
+	text += "</ul ><ul>"
+	character.flawSet.forEach(function (flaw) {
+		text += "<li>" + flaw + "</li>"
+	})
+	text += "</ul ><ul>"
+	character.skillSet.forEach(function (skill) {
+		text += "<li>" + skill.Name + "\t" + skill.Level + "</li>"
+	})
+	text += "</ul ><ul>"
+	character.weaponSet.forEach(function (item) {
+		text += "<li>" + item.Name + "\t x" + item.Quantity + "</li>"
+	})
+	text += "</ul><ul>"
+	character.equipmentSet.forEach(function (item) {
+		text += "<li>" + item.Name + "\t x" + item.Quantity + "</li>"
+	})
+	text += "</ul>"
+	GenerateSilver();
+	text += "<ul><li>" + character.silver + "s</li ></ul>" 
+
+	text += "<ul><li>Character Value: " + character.characterValue + "</li></ul>"
+	text += "<br><p>" + character.description
+
+	text += "</div>"
+
+	document.getElementById("printsection").innerHTML = text;
+}
+
+function GenerateSilver() {
+	let silver = 0;
+	let bonus = 0;
+
+	if (character.characterValue > 20) {
+		bonus = character.characterValue - 20;
+    }
+
+	for (let i = 0; i < 5 + bonus; i++) {
+		let rand = Math.floor(Math.random() * 6 + 1);
+		silver += rand;
+    }
+
+	character.silver = silver;
+}
+
+function SaveAndExport() {
+	const data = character;
+
+	fetch('https://joeglass.azurewebsites.net/charactertool.html', {
+		method: 'POST', // or 'PUT'
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+	})
+		.then(response => response.json())
+		.then(data => {
+			console.log('Success:', data);
+		})
+		.catch((error) => {
+			console.error('Error:', error);
+		});
 }
 
 document.addEventListener('keypress', function (e) {

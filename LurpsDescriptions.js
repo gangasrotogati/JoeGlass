@@ -1,7 +1,6 @@
 function DisplaySkillDescription(element) {
     let text = document.getElementById("skillset").value.substring(0, 5);
     let description = "";
-    console.log(text);
     switch (text) {
         case "Alche":
             description = "This skill enables you to create, identify and use potions, poisons, alchemical items and more.Often, having a background in herbalism is useful as well to harvest the plants needed, or mining to dig up useful minerals like cinnabar.Making an item often costs half the store cost.See Crafting with Alchemy, Page 52."
@@ -304,7 +303,7 @@ function DisplayFeatDescription() {
         case "Military Rank":
             description = "You have a proper military rank and the paperwork to prove it. Work with the GM to decide which rank."
             break;
-        case "Mind & Body":
+        case "Mind and Body":
             description = "You may use MAN instead of SPE for extra unarmed attacks. If you choose to do this, your attacks are considered Magical."
             break;
         case "Night Magic":

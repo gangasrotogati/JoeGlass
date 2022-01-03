@@ -16,14 +16,17 @@
 			<h1>LURPS Character Tool</h1>
 
 		</div>
-
-		<p>
-		Use the form below to design a character for LURPS. The Character Value tracker will keep track of how many character points (CP) you spend. Click save and export to create a character sheet.
-		</p>
 		<form id = "characterform" autocomplete="off">
 			<div class = toolsection>
-				<label for="name">Name:</label> 		
-				<input type="text" id="name" onchange = "SetCharacterName()" name="character_name">
+				<p class = "instruction">Use the form below to design a character for LURPS. The Character Value tracker will keep track of how many character points (CP) you spend. Click save and export to create a character sheet.</p>
+			</div>
+			<div class = toolsection>
+				<label for="name">Name & Race:</label> 
+			</div>
+			<div class = toolsection>		
+				<input type="text" id="name" onchange = "SetCharacterName()" name="character_name" value = "Unnamed">
+			</div>
+			<div class = toolsection>
 				<select id="race" oninput = "SetCharacterRace(); DisplayTraitDescription();" name="character_race">
   				<option selected>Human</option>
   				<option>Rooskald</option>
@@ -34,9 +37,8 @@
   				<option>Satyr</option>
   				<option>Kobold</option>
 				</select>
-
 				<input type="button" onclick="SetRandomName()" value="generate name">
-			</div>		
+			</div>
 
 			<div class = toolsection>
 				<p id = "raceDescription" class = "description">Humans are a prolific race which the Gods seemingly have made as a joke. They have invented several competing languages, making communication between themselves impossible outside their own lands. Their bite can cause sepsis, they excrete an explosive gas and they fight each other based on the colour of their hides. In between waging war on each other because they can, they work together furiously to build for themselves, often creating structures that are excessively large. They exist on an unbalanced diet of fats, sugars and substances they know to be toxic to themselves. They lack the dexterity to scratch their own backs and cannot even contort to be able to reach most of it with their tongue. Humans have deep emotional attachments to many ideals such as honour, duty and nobility. These tend to push humans further forward than most races would expect them to, where someone may give up in a hopeless situation a human will blindly continue the path because someone of a higher station ordered it to. Their mass numbers and luck have propelled them to be the dominate race. When the sciences and arts flourished, they simultaneously promoted and suppressed it.</p>
@@ -46,7 +48,7 @@
 			</div>
 			<div class = toolsection>		
 				<input type="text" id="coreTrait" name="character_coretrait" value = "Press On" disabled>
-				<select id="optionalTrait" oninput = "DisplayTraitDescription();" name="character_optionaltrait">
+				<select id="optionalTrait" oninput = "SetOptionalTrait(); DisplayTraitDescription();" name="character_optionaltrait">
 					<option>Generalist</option>
 					<option>Specialist</option>
 				</select>
@@ -61,9 +63,16 @@
 				<p class = "instruction"> A single point in a stat raises it by +5. This has no upper limit. Each character starts with 2 ranks in all 3 stats, granting them 10 HTP, MAN and SPE. This does not count against their starting CP amount. </p>
 			</div>
 			<div class = toolsection>
-				<label for="maxHealth">HTP:</label><input class = number type="number" id="maxHealth" value = 10 step = 5 min = 10 max = 200 width = 5px>
-				<label for="maxSpeed">SPE:</label><input class = number type="number" id="maxSpeed" value = 10 step = 5 min = 10 max = 200 width = 5px>
-				<label for="maxMana">MAN:</label><input class = number type="number" id="maxMana" value = 10 step = 5 min = 10 max = 200 width = 5px>
+				<label style = "font-style: italic;">Click on a stat to select it.</label>
+			</div>
+			<div id = "stats" class = toolsection>
+				<label id = "unselected" class = "stat" onclick = "SelectStat(this)" for="maxHealth">HTP: 10</label>
+				<label id = "unselected" class = "stat" onclick = "SelectStat(this)" for="maxMana">MAN: 10</label>
+				<label id = "unselected" class = "stat" onclick = "SelectStat(this)" for="maxSpeed">SPE: 10</label>
+			</div>
+			<div class = toolsection>
+				<input type="button" onclick="IncreaseStat(); CalculateCharacterValue();" value="increase stat">
+				<input type="button" onclick="DecreaseStat(); CalculateCharacterValue();" value="decrease stat">
 			</div>
 			<div class = toolsection>
 				<label>Feats:</label>
@@ -81,8 +90,8 @@
 				</select>
 			</div>
 			<div class = toolsection>
-				<input type="button" onclick="AddFeat()" value="add feat">
-				<input type="button" onclick="RemoveFeat()" value="remove feat">
+				<input type="button" onclick="AddFeat(); CalculateCharacterValue();" value="add feat">
+				<input type="button" onclick="RemoveFeat(); CalculateCharacterValue();" value="remove feat">
 			</div>
 			<div class = toolsection>
 				<p id = "featDescription" class = "description">Animals prefer not to attack you and you empathize with them readily. When mounted on a living creature, you make riding checks with DC2.</p>
@@ -103,8 +112,8 @@
 				</select>
 			</div>
 			<div class = toolsection>
-				<input type="button" onclick="AddFlaw()" value="add flaw">
-				<input type="button" onclick="RemoveFlaw()" value="remove flaw">
+				<input type="button" onclick="AddFlaw(); CalculateCharacterValue();" value="add flaw">
+				<input type="button" onclick="RemoveFlaw(); CalculateCharacterValue();" value="remove flaw">
 			</div>
 			<div class = toolsection>
 				<p id = "flawDescription" class = "description">You are addicted to a substance like drinking or smoking. Or an act, like dancing or gambling. You must resist or feed your addiction if the opportunity presents itself.</p>
@@ -148,8 +157,8 @@
 			<div class = toolsection id="skillsection">
 			</div>
 			<div class = toolsection>
-				<input type="button" onclick="IncreaseSkill(this)" value="increase skill">
-				<input type="button" onclick="DecreaseSkill(this)" value="decrease skill">
+				<input type="button" onclick="IncreaseSkill(this); CalculateCharacterValue();" value="increase skill">
+				<input type="button" onclick="DecreaseSkill(this); CalculateCharacterValue();" value="decrease skill">
 			</div>
 			<div class = toolsection onchange = "DisplaySkillDescription(this)">
 				<select id="skillset" name = "skillselect">
@@ -157,8 +166,8 @@
 			</div>
 			<div class = toolsection>
 				<div class = toolsection>
-				<input type="button" onclick="AddSkill()" value="add skill">
-				<input type="button" onclick="RemoveSkill()" value="remove skill">
+				<input type="button" onclick="AddSkill(); CalculateCharacterValue();" value="add skill">
+				<input type="button" onclick="RemoveSkill(); CalculateCharacterValue();" value="remove skill">
 				</div>
 				<p id = "skillDescription" class = "description">This skill enables you to create, identify and use potions, poisons, alchemical items and more.Often, having a background in herbalism is useful as well to harvest the plants needed, or mining to dig up useful minerals like cinnabar.Making an item often costs half the store cost.See Crafting with Alchemy, Page 52.</p>
 			</div>
@@ -206,13 +215,29 @@
 				<input type="button" onclick="RemoveEquipment()" value="remove item">
 				</div>
 			</div>
+			<div class = toolsection>
+				<label>Character Value:</label>
+				<p id="charactervalue"> 0 </p>
+			</div>
+			<div class = toolsection>
+				<label>Description:</label>
+			</div>
+			<div class = toolsection>
+				<textarea id="description" cols="30" rows="8" onchange="SetDescription();"></textarea>
+			</div>
+			<div class = toolsection>
+				<input type = button onclick="PrintCharacter();" value="save and export">
+			</div>
+			<div id = "printsection" class = toolsection>
+			</div>
+			
 		</form>
 	</div>
 
 </div>
 <div class = footer>
 		
-	<a href="index.html">return</a>
+	<a href="default.html">return</a>
 		
 </div>
 
