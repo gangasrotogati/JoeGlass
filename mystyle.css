@@ -38,7 +38,7 @@ html{
 	background-size: cover;
 }
 
-h1 { color: var(--quaternary-color); font-family: 'Helvetica Neue', sans-serif; font-size: 46px; font-weight: 100; line-height: 50px; letter-spacing: 1px; padding: 0 0 40px; border-bottom: double #555; margin: 10px; padding: 10px;}
+h1 { color: var(--quaternary-color); font-family: 'Helvetica Neue', sans-serif; font-size: 46px; font-weight: 100; line-height: 50px; letter-spacing: 1px; padding: 0 0 40px; border-bottom: double #555; margin: 10px; padding: 10px; text-align: center;}
 
 
 p { color: var(--quaternary-color); font-family: 'Verdana', sans-serif; font-size: 12px; line-height: 26px; text-indent: 30px; margin: 0;}
@@ -135,6 +135,11 @@ ul{
 
 #characterform{
 	margin: auto;
+}
+
+#characterdisplay{
+  	display: flex;
+  	flex-direction: column-reverse;
 }
 
 #charactervalue{
