@@ -1232,6 +1232,7 @@ function PrintCharacter() {
 	document.getElementById("printsection").innerHTML = text;
 
 	CreatePublishButton();
+
 }
 
 function CreatePublishButton() {
@@ -1286,7 +1287,7 @@ function CreatePublishButton() {
 	text = filepath + query
 
 
-	document.getElementById("publish").innerHTML = "<a href='" + text + "'><input type ='button' value ='Publish'></a>";
+	document.getElementById("publish").innerHTML = "<a href='" + text + "'><input type ='button' value ='Publish Link'></a>";
 }
 
 function GenerateSilver() {
@@ -1303,6 +1304,60 @@ function GenerateSilver() {
     }
 
 	character.silver = silver;
+}
+
+function SetCookie() {
+	let filepath = "/newcharacter"
+	let query = "?"
+	let text = ""
+
+	query += "name=" + character.name.replace(/ /g, "_")
+	query += "&race=" + character.race
+	query += "&coreTrait=" + character.coreTrait
+	query += "&optionalTrait=" + character.optionalTrait
+	query += "&maxHealth=" + character.maxHealth
+	query += "&maxMana=" + character.maxMana
+	query += "&maxSpeed=" + character.maxSpeed
+	query += "&job=" + character.job
+	query += "&belief=" + character.belief
+
+	query += "&featSet="
+	character.featSet.forEach(function (feat) {
+		query += feat + ","
+
+	})
+
+	query += "&flawSet="
+	character.flawSet.forEach(function (flaw) {
+		query += flaw + ","
+
+	})
+
+	query += "&skillSet="
+	character.skillSet.forEach(function (skill) {
+		query += skill.Name.replace('&', 'amp').replace(',', 'COMMA') + "." + skill.Level + ","
+	})
+
+	query += "&weaponSet="
+	character.weaponSet.forEach(function (weapon) {
+		query += weapon.Name + "." + weapon.Quantity + ","
+
+	})
+
+	query += "&equipmentSet="
+	character.equipmentSet.forEach(function (equipment) {
+		query += equipment.Name.replace(',', "comm") + "." + equipment.Quantity + ","
+
+	})
+
+	query += "&silver=" + character.silver
+	query += "&characterValue=" + character.characterValue
+
+	query += "&description=" + btoa(character.description)
+
+	text = filepath + query
+
+	document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/" + filepath;
 }
 
 document.addEventListener('keypress', function (e) {

@@ -88,6 +88,18 @@ ul{
 	border-color: var(--bright-gray);
 }
 
+.linkbox{
+	background-color: var(--off-white);
+	padding: 5px;
+	text-align: center;
+	border-style: solid; 
+	border-color: var(--bright-gray);
+}
+
+.linkbox a{
+	font-size: 12px;
+}
+
 .tool{
 	margin: 0px 20% 0px 20%;
 }
